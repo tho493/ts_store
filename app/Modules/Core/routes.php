@@ -29,6 +29,7 @@ Route::prefix('admin')->name('admin.')->group(function() {
         Route::post('/products/{id}', [AdminController::class, 'updateProduct'])->name('products.update');
         Route::post('/products/{id}/quick-update', [AdminController::class, 'quickUpdateProduct'])->name('products.quick_update');
         Route::delete('/products/{id}', [AdminController::class, 'deleteProduct'])->name('products.delete');
+        Route::delete('/products/images/{id}', [AdminController::class, 'deleteProductImage'])->name('products.images.delete');
         
         // CRUD Danh mục
         Route::get('/categories', [AdminController::class, 'categories'])->name('categories');

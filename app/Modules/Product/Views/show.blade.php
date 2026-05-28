@@ -4,7 +4,7 @@
 @section('meta_description', Str::limit(strip_tags($product->description), 150))
 
 @section('content')
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16" x-data>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16" x-data="{ activeImage: '{{ $product->thumbnail ? (str_starts_with($product->thumbnail, 'http') ? $product->thumbnail : asset('storage/' . $product->thumbnail)) : '' }}' }">
     
     <!-- Breadcrumb -->
     <nav class="flex text-xs text-[#666666] mb-8 gap-2">
@@ -21,10 +21,38 @@
         <!-- Left: Image Gallery (Tối giản - Flat) -->
         <div class="flex flex-col gap-4">
             <div class="aspect-square bg-[#F7F7F7] border border-[#ECECEC] rounded flex items-center justify-center p-12">
-                <svg class="w-24 h-24 text-[#2E9F5B]" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"></path>
-                </svg>
+                <template x-if="activeImage">
+                    <img :src="activeImage" alt="{{ $product->name }}" class="w-full h-full object-contain">
+                </template>
+                <template x-if="!activeImage">
+                    <svg class="w-24 h-24 text-[#2E9F5B]" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"></path>
+                    </svg>
+                </template>
             </div>
+            
+            @if($product->thumbnail || !$product->images->isEmpty())
+                <div class="flex gap-3 overflow-x-auto pb-2 mt-2">
+                    @if($product->thumbnail)
+                        <button 
+                            @click="activeImage = '{{ str_starts_with($product->thumbnail, 'http') ? $product->thumbnail : asset('storage/' . $product->thumbnail) }}'"
+                            class="w-16 h-16 border rounded p-1 bg-[#F7F7F7] hover:border-[#2E9F5B] transition-colors focus:outline-none flex-shrink-0"
+                            :class="{'border-[#2E9F5B]': activeImage === '{{ str_starts_with($product->thumbnail, 'http') ? $product->thumbnail : asset('storage/' . $product->thumbnail) }}'}"
+                        >
+                            <img src="{{ str_starts_with($product->thumbnail, 'http') ? $product->thumbnail : asset('storage/' . $product->thumbnail) }}" alt="Thumb" class="w-full h-full object-contain">
+                        </button>
+                    @endif
+                    @foreach($product->images as $img)
+                        <button 
+                            @click="activeImage = '{{ asset('storage/' . $img->image) }}'"
+                            class="w-16 h-16 border rounded p-1 bg-[#F7F7F7] hover:border-[#2E9F5B] transition-colors focus:outline-none flex-shrink-0"
+                            :class="{'border-[#2E9F5B]': activeImage === '{{ asset('storage/' . $img->image) }}'}"
+                        >
+                            <img src="{{ asset('storage/' . $img->image) }}" alt="Sub" class="w-full h-full object-contain">
+                        </button>
+                    @endforeach
+                </div>
+            @endif
         </div>
 
         <!-- Right: Product Info -->
@@ -45,9 +73,9 @@
                 @endif
             </div>
 
-            <!-- Mô tả ngắn -->
+            <!-- Mô tả sản phẩm -->
             <div class="text-sm text-[#666666] leading-relaxed">
-                {{ $product->description }}
+                {!! nl2br(e($product->description)) !!}
             </div>
 
             <!-- Nút mua hàng / liên hệ động (Dùng Alpine.js dispatch sang Livewire) -->

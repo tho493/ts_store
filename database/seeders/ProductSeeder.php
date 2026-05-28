@@ -40,7 +40,7 @@ class ProductSeeder extends Seeder
                 'price' => 450000.00,
                 'sale_price' => 390000.00,
                 'stock' => 150,
-                'thumbnail' => 'panasonic-eneloop-pro.jpg',
+                'thumbnail' => null,
                 'description' => 'Pin sạc Panasonic Eneloop Pro AA là dòng pin sạc cao cấp nhất của Panasonic, dung lượng cực cao 2500mAh, độ bền tuyệt vời, phù hợp cho các thiết bị tiêu thụ điện năng lớn như máy ảnh, đèn flash, đồ chơi công nghệ cao.',
                 'specifications' => [
                     'Dung lượng' => '2500 mAh',
@@ -59,7 +59,7 @@ class ProductSeeder extends Seeder
                 'price' => 2990000.00,
                 'sale_price' => 2650000.00,
                 'stock' => 45,
-                'thumbnail' => 'anker-prime-24k.jpg',
+                'thumbnail' => null,
                 'description' => 'Pin sạc dự phòng Anker Prime công suất cực đại 140W, dung lượng khủng 24,000mAh. Thiết kế màn hình LCD thông minh hiển thị chi tiết dòng điện, công suất và thời gian sạc còn lại. Hỗ trợ sạc nhanh đồng thời 3 thiết bị.',
                 'specifications' => [
                     'Dung lượng' => '24,000 mAh',
@@ -78,7 +78,7 @@ class ProductSeeder extends Seeder
                 'price' => 850000.00,
                 'sale_price' => null,
                 'stock' => 30,
-                'thumbnail' => 'dell-latitude-e7440.jpg',
+                'thumbnail' => null,
                 'description' => 'Pin thay thế cao cấp cho dòng máy Dell Latitude E7440, dung lượng chuẩn 47Wh đảm bảo thời lượng sử dụng bền bỉ từ 3 - 5 giờ liên tục. Sử dụng cell pin Polymer cao cấp giúp chống chai pin và an toàn tuyệt đối khi sử dụng.',
                 'specifications' => [
                     'Dung lượng' => '47 Wh (4 cell)',
@@ -96,7 +96,7 @@ class ProductSeeder extends Seeder
                 'price' => 1250000.00,
                 'sale_price' => 1100000.00,
                 'stock' => 80,
-                'thumbnail' => 'pisen-iphone-13promax.jpg',
+                'thumbnail' => null,
                 'description' => 'Pin Pisen Ultra dung lượng siêu cao dành riêng cho iPhone 13 Pro Max, nâng cấp dung lượng hơn 10% so với pin gốc của Apple. An toàn chống cháy nổ, chu kỳ sạc xả lên đến 800 lần, đạt chuẩn kiểm định khắt khe của châu Âu.',
                 'specifications' => [
                     'Dung lượng' => '4750 mAh',
@@ -114,7 +114,7 @@ class ProductSeeder extends Seeder
                 'price' => 8900000.00,
                 'sale_price' => 8200000.00,
                 'stock' => 15,
-                'thumbnail' => 'ts-lifepo4-12v-100ah.jpg',
+                'thumbnail' => null,
                 'description' => 'Pin lưu trữ năng lượng công nghiệp LiFePO4 thương hiệu TS Battery. Dung lượng thực tế 100Ah, tuổi thọ chu kỳ sạc xả trên 3500 lần (DOD 80%). Tích hợp mạch quản lý pin thông minh (BMS) bảo vệ quá dòng, quá áp, ngắn mạch.',
                 'specifications' => [
                     'Dung lượng' => '100 Ah',
@@ -134,7 +134,7 @@ class ProductSeeder extends Seeder
                 'price' => 1190000.00,
                 'sale_price' => 990000.00,
                 'stock' => 60,
-                'thumbnail' => 'samsung-20000-25w.jpg',
+                'thumbnail' => null,
                 'description' => 'Sạc dự phòng Samsung chính hãng dung lượng lớn 20,000mAh hỗ trợ sạc siêu nhanh PD 25W. Vỏ ngoài làm bằng vật liệu tái chế bảo vệ môi trường, thiết kế màu xám hiện đại, nhỏ gọn và cầm nắm chắc chắn.',
                 'specifications' => [
                     'Dung lượng' => '20,000 mAh',

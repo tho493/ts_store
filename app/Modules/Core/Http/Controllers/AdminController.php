@@ -146,7 +146,10 @@ class AdminController extends Controller
             'price' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
             'category_id' => 'required|exists:categories,id',
-            'description' => 'nullable'
+            'description' => 'nullable',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'images' => 'nullable|array',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
         $specs = [];
@@ -158,7 +161,13 @@ class AdminController extends Controller
             }
         }
 
-        Product::create([
+        $thumbnailPath = null;
+        if ($request->hasFile('thumbnail')) {
+            $image = $request->file('thumbnail');
+            $thumbnailPath = $image->store('products', 'public');
+        }
+
+        $product = Product::create([
             'category_id' => $request->category_id,
             'name' => $request->name,
             'slug' => Str::slug($request->name),
@@ -168,8 +177,20 @@ class AdminController extends Controller
             'stock' => $request->stock,
             'description' => $request->description,
             'specifications' => $specs,
+            'thumbnail' => $thumbnailPath,
             'status' => $request->has('status')
         ]);
+
+        // Lưu album ảnh phụ
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $index => $file) {
+                $path = $file->store('products', 'public');
+                $product->images()->create([
+                    'image' => $path,
+                    'sort_order' => $index
+                ]);
+            }
+        }
 
         return redirect()->route('admin.products')->with('success', 'Đã thêm sản phẩm mới thành công.');
     }
@@ -197,7 +218,10 @@ class AdminController extends Controller
             'price' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
             'category_id' => 'required|exists:categories,id',
-            'description' => 'nullable'
+            'description' => 'nullable',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'images' => 'nullable|array',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
         $specs = [];
@@ -209,7 +233,7 @@ class AdminController extends Controller
             }
         }
 
-        $product->update([
+        $data = [
             'category_id' => $request->category_id,
             'name' => $request->name,
             'slug' => Str::slug($request->name),
@@ -220,7 +244,31 @@ class AdminController extends Controller
             'description' => $request->description,
             'specifications' => $specs,
             'status' => $request->has('status')
-        ]);
+        ];
+
+        if ($request->hasFile('thumbnail')) {
+            // Xóa ảnh đại diện cũ
+            if ($product->thumbnail) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($product->thumbnail);
+            }
+            
+            $image = $request->file('thumbnail');
+            $data['thumbnail'] = $image->store('products', 'public');
+        }
+
+        $product->update($data);
+
+        // Lưu thêm ảnh phụ mới
+        if ($request->hasFile('images')) {
+            $currentMaxSort = $product->images()->max('sort_order') ?? -1;
+            foreach ($request->file('images') as $index => $file) {
+                $path = $file->store('products', 'public');
+                $product->images()->create([
+                    'image' => $path,
+                    'sort_order' => $currentMaxSort + 1 + $index
+                ]);
+            }
+        }
 
         return redirect()->route('admin.products')->with('success', 'Đã cập nhật sản phẩm thành công.');
     }
@@ -484,5 +532,20 @@ class AdminController extends Controller
         $user->delete();
 
         return redirect()->route('admin.users')->with('success', 'Đã xóa tài khoản người dùng thành công.');
+    }
+
+    /**
+     * Xóa ảnh phụ của sản phẩm
+     */
+    public function deleteProductImage($id)
+    {
+        $image = \App\Modules\Product\Models\ProductImage::findOrFail($id);
+        
+        // Xóa tệp vật lý trong storage
+        \Illuminate\Support\Facades\Storage::disk('public')->delete($image->image);
+        
+        $image->delete();
+        
+        return redirect()->back()->with('success', 'Đã xóa ảnh phụ thành công.');
     }
 }

@@ -1,12 +1,23 @@
 <div class="bg-white border border-[#ECECEC] rounded overflow-hidden flex flex-col hover:scale-[1.02] transition-all duration-200">
     <!-- Ảnh sản phẩm -->
-    <a href="/products/{{ $product->slug }}" class="block aspect-square bg-[#F7F7F7] relative flex items-center justify-center p-4 sm:p-6 border-b border-[#ECECEC]">
-        <div class="flex flex-col items-center justify-center text-center">
+    <a href="/products/{{ $product->slug }}" 
+       class="block aspect-square bg-[#F7F7F7] relative flex items-center justify-center p-4 sm:p-6 border-b border-[#ECECEC]"
+       x-data="{ imgError: false }">
+        
+        <div x-show="imgError || !'{{ $product->thumbnail }}'" class="flex flex-col items-center justify-center text-center w-full h-full">
             <svg class="w-8 h-8 sm:w-12 sm:h-12 text-[#2E9F5B]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"></path>
             </svg>
             <span class="text-[8px] sm:text-[10px] font-bold text-[#666666] uppercase mt-1 sm:mt-2">TS BATTERY</span>
         </div>
+        
+        @if($product->thumbnail)
+            <img x-show="!imgError" 
+                 src="{{ str_starts_with($product->thumbnail, 'http') ? $product->thumbnail : asset('storage/' . $product->thumbnail) }}" 
+                 alt="{{ $product->name }}" 
+                 class="w-full h-full object-contain"
+                 x-on:error="imgError = true">
+        @endif
         
         <!-- Nhãn giảm giá (nếu có) -->
         @if($product->sale_price)
@@ -40,7 +51,6 @@
                         <span class="text-[10px] text-[#666666]">
                             <strong class="text-[#111111] font-medium">Điện áp:</strong> {{ $product->specifications['Điện áp'] }}
                         </span>
-                    </span>
                     @endif
                 </div>
             @endif

@@ -9,7 +9,26 @@
         { key: 'Dung lượng', value: '' },
         { key: 'Điện áp', value: '' },
         { key: 'Bảo hành', value: '12 tháng' }
-    ] 
+    ],
+    thumbnailPreview: '',
+    imagesPreviews: [],
+    
+    handleThumbnailChange(e) {
+        const file = e.target.files[0];
+        if (file) {
+            this.thumbnailPreview = URL.createObjectURL(file);
+        } else {
+            this.thumbnailPreview = '';
+        }
+    },
+    
+    handleImagesChange(e) {
+        this.imagesPreviews = [];
+        const files = e.target.files;
+        for (let i = 0; i < files.length; i++) {
+            this.imagesPreviews.push(URL.createObjectURL(files[i]));
+        }
+    }
 }">
     
     <div class="mb-6 flex justify-between items-center pb-4 border-b border-[#F7F7F7]">
@@ -19,7 +38,7 @@
         </a>
     </div>
 
-    <form action="{{ route('admin.products.store') }}" method="POST" class="flex flex-col gap-6">
+    <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data" class="flex flex-col gap-6">
         @csrf
 
         <!-- Hàng 1: Tên & SKU -->
@@ -114,6 +133,80 @@
                 />
                 @error('sale_price') <span class="text-[10px] text-red-500">{{ $message }}</span> @enderror
             </div>
+        </div>
+
+        <!-- Ảnh đại diện sản phẩm -->
+        <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-semibold text-[#111111]">Ảnh đại diện sản phẩm <span class="text-red-500">*</span></label>
+            <div class="relative border-2 border-dashed border-[#ECECEC] rounded-lg p-4 bg-[#F7F7F7] hover:border-[#2E9F5B] transition-colors flex flex-col items-center justify-center cursor-pointer"
+                 @click="$refs.thumbnailInput.click()">
+                
+                <input 
+                    type="file" 
+                    x-ref="thumbnailInput"
+                    id="thumbnail" 
+                    name="thumbnail" 
+                    accept="image/*"
+                    class="hidden"
+                    @change="handleThumbnailChange"
+                    required
+                />
+                
+                <!-- Khi chưa chọn ảnh -->
+                <div x-show="!thumbnailPreview" class="flex flex-col items-center py-4">
+                    <svg class="w-10 h-10 text-[#666666] mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span class="text-xs font-medium text-[#111111]">Nhấp để tải lên ảnh đại diện</span>
+                    <span class="text-[10px] text-[#666666] mt-1">Định dạng JPEG, PNG, JPG, GIF, SVG (tối đa 2MB)</span>
+                </div>
+
+                <!-- Khi đã chọn ảnh -->
+                <div x-show="thumbnailPreview" class="flex flex-col items-center gap-2">
+                    <img :src="thumbnailPreview" alt="Thumbnail Preview" class="w-32 h-32 object-contain border border-[#ECECEC] rounded p-1 bg-white">
+                    <span class="text-[10px] text-[#2E9F5B] font-semibold">Ảnh đã được chọn - Nhấp để đổi</span>
+                </div>
+            </div>
+            @error('thumbnail') <span class="text-[10px] text-red-500">{{ $message }}</span> @enderror
+        </div>
+
+        <!-- Album ảnh phụ sản phẩm -->
+        <div class="flex flex-col gap-1.5 p-4 bg-[#F7F7F7] border border-[#ECECEC] rounded-lg">
+            <label class="text-xs font-semibold text-[#111111]">Album ảnh phụ sản phẩm (Chọn nhiều ảnh)</label>
+            <div class="border-2 border-dashed border-[#ECECEC] rounded-lg p-4 bg-white hover:border-[#2E9F5B] transition-colors flex flex-col items-center justify-center cursor-pointer mb-2"
+                 @click="$refs.imagesInput.click()">
+                
+                <input 
+                    type="file" 
+                    x-ref="imagesInput"
+                    id="images" 
+                    name="images[]" 
+                    accept="image/*"
+                    multiple
+                    class="hidden"
+                    @change="handleImagesChange"
+                />
+                
+                <div class="flex flex-col items-center py-2">
+                    <svg class="w-8 h-8 text-[#666666] mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"></path>
+                    </svg>
+                    <span class="text-xs font-medium text-[#111111]">Nhấp để chọn thêm ảnh phụ</span>
+                </div>
+            </div>
+
+            <!-- Previews ảnh phụ chuẩn bị tải lên -->
+            <div x-show="imagesPreviews.length > 0" class="mt-2">
+                <span class="text-[10px] font-bold text-[#666666] uppercase block mb-2">Ảnh phụ chuẩn bị tải lên (Tổng: <span x-text="imagesPreviews.length"></span>)</span>
+                <div class="flex flex-wrap gap-3">
+                    <template x-for="(src, index) in imagesPreviews" :key="index">
+                        <div class="relative w-16 h-16 border border-[#ECECEC] rounded p-1 bg-white flex items-center justify-center">
+                            <img :src="src" class="w-full h-full object-contain">
+                        </div>
+                    </template>
+                </div>
+            </div>
+            @error('images') <span class="text-[10px] text-red-500">{{ $message }}</span> @enderror
         </div>
 
         <!-- Mô tả sản phẩm -->
