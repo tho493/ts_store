@@ -31,7 +31,6 @@ docs
 .nova
 .codex
 
-docker
 docker-compose.yml
 Dockerfile
 deploy.sh
