@@ -9,3 +9,67 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+/* Apple Style Exploded Battery 3D Animations */
+@keyframes float-glass {
+    0%, 100% {
+        transform: translateZ(20px) translateY(0px) rotateX(0deg);
+    }
+    50% {
+        transform: translateZ(35px) translateY(-8px) rotateX(1deg);
+    }
+}
+
+@keyframes float-bms {
+    0%, 100% {
+        transform: translateZ(10px) translateY(0px) rotateY(0deg);
+    }
+    50% {
+        transform: translateZ(20px) translateY(-5px) rotateY(-1deg);
+    }
+}
+
+@keyframes float-cells {
+    0%, 100% {
+        transform: translateZ(0px) translateY(0px);
+    }
+    50% {
+        transform: translateZ(8px) translateY(-3px);
+    }
+}
+
+@keyframes float-frame {
+    0%, 100% {
+        transform: translateZ(-10px) translateY(0px);
+    }
+    50% {
+        transform: translateZ(-20px) translateY(3px);
+    }
+}
+
+.animate-float-glass {
+    animation: float-glass 6s ease-in-out infinite;
+}
+
+.animate-float-bms {
+    animation: float-bms 5.5s ease-in-out infinite;
+}
+
+.animate-float-cells {
+    animation: float-cells 7s ease-in-out infinite;
+}
+
+.animate-float-frame {
+    animation: float-frame 6.5s ease-in-out infinite;
+}
+
+/* Tắt chuyển động lơ lửng riêng lẻ khi gom pin (hover) để lắp ráp khít hoàn toàn */
+.group:hover .animate-float-glass,
+.group:hover .animate-float-bms,
+.group:hover .animate-float-cells,
+.group:hover .animate-float-frame {
+    animation-play-state: paused;
+    transform: translateZ(0) translateY(0) rotateX(0) rotateY(0) !important;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+

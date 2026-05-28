@@ -1,32 +1,216 @@
 <div x-data="{ mobileFiltersOpen: false }">
-    <!-- HERO SECTION (Tối giản - Clean) -->
-    <section class="bg-white border-b border-[#ECECEC] py-10 sm:py-16 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            <!-- Left content -->
-            <div class="flex flex-col gap-5">
-                <span class="text-xs font-bold uppercase tracking-wider text-[#2E9F5B]">Thương hiệu uy tín</span>
-                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#111111] font-outfit leading-tight">
-                    Năng lượng bền bỉ cho mọi hành trình
-                </h1>
-                <p class="text-sm sm:text-base text-[#666666] leading-relaxed max-w-lg">
-                    TS Battery cung cấp giải pháp năng lượng tối ưu, bền bỉ và tuyệt đối an toàn. Chuyên cung cấp các loại pin laptop, pin điện thoại, sạc dự phòng hiệu năng cao và pin lưu trữ năng lượng công nghiệp.
-                </p>
-                <div class="flex gap-4">
-                    <a href="#catalog" class="inline-block bg-[#2E9F5B] text-white font-semibold text-sm uppercase tracking-wider px-6 sm:px-8 py-3 sm:py-3.5 rounded hover:bg-[#238247] transition duration-200">
-                        Khám phá sản phẩm
-                    </a>
+
+    <!-- HEADER -->
+    <section class="relative overflow-hidden border-b border-[#ECECEC] bg-[#FAFAFA]">
+        <!-- subtle background -->
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,#DCFCE7,transparent_30%)]"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+                <!-- LEFT -->
+                <div class="flex flex-col gap-6">
+
+                    <!-- badge -->
+                    <!-- <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-[#2E9F5B]"></span>
+                        <span class="text-xs font-bold uppercase tracking-[0.2em] text-[#2E9F5B]">
+                            TS.BATTERY
+                        </span>
+                    </div> -->
+
+                    <!-- heading -->
+                    <div class="space-y-5">
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-[-0.04em] leading-[0.95] text-[#111111] font-outfit">
+                            Năng lượng bền bỉ
+                            cho mọi hành trình
+                        </h1>
+
+                        <p class="max-w-xl text-base leading-8 text-[#666666]">
+                            Chúng tôi chuyên cung cấp pin laptop, pin điện thoại,
+                            pin công nghiệp và giải pháp lưu trữ năng lượng
+                            chất lượng cao, an toàn và ổn định cho công việc mỗi ngày.
+                        </p>
+                    </div>
+
+                    <!-- buttons -->
+                    <div class="flex flex-wrap items-center gap-4 pt-2">
+
+                        <a href="#catalog"
+                        class="inline-flex items-center justify-center h-14 px-8 rounded-2xl bg-[#2E9F5B] text-white text-sm font-semibold transition-all duration-300 hover:bg-[#238247] hover:-translate-y-0.5">
+                            Khám phá sản phẩm
+                        </a>
+
+                        <a href="#"
+                        class="inline-flex items-center justify-center h-14 px-8 rounded-2xl border border-[#ECECEC] bg-white text-[#111111] text-sm font-semibold transition-all duration-300 hover:bg-[#F7F7F7]">
+                            Xem sản phẩm nổi bật
+                        </a>
+                    </div>
+
+                    <!-- trust stats -->
+                    <!-- <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8">
+
+                        <div class="flex flex-col gap-1">
+                            <span class="text-2xl font-bold text-[#111111]">
+                                12K+
+                            </span>
+
+                            <span class="text-sm text-[#666666]">
+                                Khách hàng
+                            </span>
+                        </div>
+
+                        <div class="flex flex-col gap-1">
+                            <span class="text-2xl font-bold text-[#111111]">
+                                500+
+                            </span>
+
+                            <span class="text-sm text-[#666666]">
+                                Sản phẩm
+                            </span>
+                        </div>
+
+                        <div class="flex flex-col gap-1">
+                            <span class="text-2xl font-bold text-[#111111]">
+                                24M
+                            </span>
+
+                            <span class="text-sm text-[#666666]">
+                                Bảo hành
+                            </span>
+                        </div>
+
+                        <div class="flex flex-col gap-1">
+                            <span class="text-2xl font-bold text-[#111111]">
+                                4.9★
+                            </span>
+
+                            <span class="text-sm text-[#666666]">
+                                Đánh giá
+                            </span>
+                        </div>
+                    </div> -->
+                </div>
+
+                <!-- RIGHT -->
+                <div class="relative flex justify-center lg:justify-end">
+
+                    <!-- glow -->
+                    <div class="absolute w-80 h-80 bg-[#DCFCE7] rounded-full blur-3xl opacity-40"></div>
+
+                    <!-- main showcase -->
+                    <div class="relative bg-white border border-[#ECECEC] rounded-[32px] p-10 shadow-[0_10px_40px_rgba(0,0,0,0.04)]">
+
+                        <!-- battery -->
+                        <div class="relative w-56 h-[420px] bg-[#111111] rounded-[42px] p-3">
+
+                            <!-- battery top -->
+                            <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-5 rounded-full bg-[#2E9F5B]"></div>
+
+                            <!-- inner -->
+                            <div class="relative w-full h-full rounded-[34px] bg-[#F5F5F5] overflow-hidden flex items-center justify-center">
+
+                                <!-- battery fill -->
+                                <div class="absolute bottom-0 left-0 right-0 h-[99%] bg-[#2E9F5B] transition-all duration-1000"></div>
+
+                                <!-- content -->
+                                <div class="relative z-10 flex flex-col items-center">
+                                    <!-- <span class="text-5xl font-black tracking-tight text-white">
+                                        TS
+                                    </span> -->
+
+                                    <span class="text-sm text-white/80 mt-2">
+                                        99%
+                                    </span>
+                                </div>
+                            </div>
+                        </div>  
+                    </div>
                 </div>
             </div>
-            <!-- Right content (Product Showcase) - ẩn trên mobile nhỏ -->
-            <div class="hidden sm:flex justify-center lg:justify-end">
-                <div class="relative w-full max-w-sm bg-[#F7F7F7] border border-[#ECECEC] rounded-lg aspect-square flex items-center justify-center p-8 overflow-hidden">
-                    <div class="w-32 sm:w-40 h-52 sm:h-64 bg-white border border-[#ECECEC] rounded-2xl relative flex flex-col items-center justify-center p-4">
-                        <div class="w-12 h-4 bg-[#2E9F5B] rounded-t-lg absolute -top-4"></div>
-                        <div class="w-full flex-1 bg-[#F0FDF4] border border-[#D1FAE5] rounded-xl flex flex-col items-center justify-center gap-2 overflow-hidden relative">
-                            <div class="absolute bottom-0 left-0 right-0 bg-[#2E9F5B] h-4/5"></div>
-                            <span class="text-xl font-bold tracking-tight text-white z-10 font-outfit">TS</span>
-                            <span class="text-[10px] text-white/80 z-10 font-medium">80%</span>
-                        </div>
+        </div>
+    </section>
+
+    <!-- TRUST BAR -->
+    <section class="border-b border-[#ECECEC] bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 py-8">
+
+                <!-- item -->
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-2xl bg-[#F5F5F5] flex items-center justify-center">
+
+                        <svg class="w-5 h-5 text-[#2E9F5B]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                        </svg>
+
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-sm font-semibold text-[#111111]">
+                            Chính hãng
+                        </span>
+
+                        <span class="text-xs text-[#666666]">
+                            100% sản phẩm thật
+                        </span>
+                    </div>
+                </div>
+
+                <!-- item -->
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-2xl bg-[#F5F5F5] flex items-center justify-center">
+                        <svg class="w-5 h-5 text-[#2E9F5B]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18z"></path>
+                        </svg>
+                    </div>
+
+                    <div class="flex flex-col">
+                        <span class="text-sm font-semibold text-[#111111]">
+                            Bảo hành dài hạn
+                        </span>
+
+                        <span class="text-xs text-[#666666]">
+                            Hỗ trợ nhanh chóng
+                        </span>
+                    </div>
+                </div>
+
+                <!-- item -->
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-2xl bg-[#F5F5F5] flex items-center justify-center">
+                        <svg class="w-5 h-5 text-[#2E9F5B]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 17V7m0 0L5 11m4-4l4 4"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 7v10m0 0l4-4m-4 4l-4-4"></path>
+                        </svg>
+                    </div>
+
+                    <div class="flex flex-col">
+                        <span class="text-sm font-semibold text-[#111111]">
+                            Đổi trả 7 ngày
+                        </span>
+
+                        <span class="text-xs text-[#666666]">
+                            Nhanh và dễ dàng
+                        </span>
+                    </div>
+                </div>
+
+                <!-- item -->
+                <div class="flex items-center gap-4">
+
+                    <div class="w-12 h-12 rounded-2xl bg-[#F5F5F5] flex items-center justify-center">
+                        <svg class="w-5 h-5 text-[#2E9F5B]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h11M9 21V3"></path>
+                        </svg>
+                    </div>
+
+                    <div class="flex flex-col">
+                        <span class="text-sm font-semibold text-[#111111]">
+                            Giao hàng toàn quốc
+                        </span>
+
+                        <span class="text-xs text-[#666666]">
+                            Ship nhanh toàn quốc
+                        </span>
                     </div>
                 </div>
             </div>
