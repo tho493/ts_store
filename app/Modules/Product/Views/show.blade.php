@@ -128,6 +128,18 @@
         </div>
     </div>
 
+    @if($product->content)
+        <!-- Chi tiết bài viết sản phẩm (WYSIWYG HTML) -->
+        <div class="mt-12 bg-white border border-[#ECECEC] rounded-lg p-6 sm:p-8">
+            <h2 class="text-lg font-bold tracking-tight text-[#111111] font-outfit uppercase mb-6 pb-3 border-b border-[#F7F7F7]">
+                Đặc điểm nổi bật & Giới thiệu chi tiết
+            </h2>
+            <div class="prose max-w-none text-[#444444] leading-relaxed space-y-4">
+                {!! $product->content !!}
+            </div>
+        </div>
+    @endif
+
     <!-- Related Products -->
     @if(!$relatedProducts->isEmpty())
         <section class="mt-20">

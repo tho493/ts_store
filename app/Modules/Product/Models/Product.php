@@ -18,6 +18,7 @@ class Product extends Model
         'stock',
         'thumbnail',
         'description',
+        'content',
         'specifications',
         'status'
     ];

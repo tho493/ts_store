@@ -263,13 +263,23 @@
 
         <!-- Mô tả sản phẩm -->
         <div class="flex flex-col gap-1.5">
-            <label for="description" class="text-xs font-semibold text-[#111111]">Mô tả sản phẩm</label>
+            <label for="description" class="text-xs font-semibold text-[#111111]">Mô tả sản phẩm (Ngắn)</label>
             <textarea 
                 id="description" 
                 name="description" 
-                rows="4"
+                rows="3"
                 class="w-full bg-[#F7F7F7] text-xs text-[#111111] border border-[#ECECEC] rounded px-4 py-2.5 focus:outline-none focus:border-[#2E9F5B] focus:bg-white transition"
             >{{ old('description', $product->description) }}</textarea>
+        </div>
+
+        <!-- Mô tả chi tiết (Bài viết giới thiệu sản phẩm) -->
+        <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-semibold text-[#111111]">Mô tả chi tiết (Bài viết giới thiệu sản phẩm)</label>
+            <div class="bg-white border border-[#ECECEC] rounded">
+                <div id="editor-container" style="height: 300px;" class="text-xs"></div>
+            </div>
+            <input type="hidden" id="content" name="content" value="{{ old('content', $product->content) }}">
+            @error('content') <span class="text-[10px] text-red-500">{{ $message }}</span> @enderror
         </div>
 
         <!-- THÔNG SỐ KỸ THUẬT ĐỘNG (Dynamic specifications - AlpineJS) -->
@@ -342,4 +352,33 @@
     @csrf
     @method('DELETE')
 </form>
+
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const quill = new Quill('#editor-container', {
+            theme: 'snow',
+            modules: {
+                toolbar: [
+                    [{ 'header': [1, 2, 3, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    [{ 'color': [] }, { 'background': [] }],
+                    ['link', 'image'],
+                    ['clean']
+                ]
+            }
+        });
+
+        const contentInput = document.getElementById('content');
+        if (contentInput.value) {
+            quill.root.innerHTML = contentInput.value;
+        }
+
+        quill.on('text-change', function() {
+            contentInput.value = quill.root.innerHTML === '<p><br></p>' ? '' : quill.root.innerHTML;
+        });
+    });
+</script>
 @endsection

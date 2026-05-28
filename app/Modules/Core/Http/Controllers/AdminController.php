@@ -147,6 +147,7 @@ class AdminController extends Controller
             'stock' => 'required|integer|min:0',
             'category_id' => 'required|exists:categories,id',
             'description' => 'nullable',
+            'content' => 'nullable',
             'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'images' => 'nullable|array',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
@@ -176,6 +177,7 @@ class AdminController extends Controller
             'sale_price' => $request->sale_price ?: null,
             'stock' => $request->stock,
             'description' => $request->description,
+            'content' => $request->content,
             'specifications' => $specs,
             'thumbnail' => $thumbnailPath,
             'status' => $request->has('status')
@@ -219,6 +221,7 @@ class AdminController extends Controller
             'stock' => 'required|integer|min:0',
             'category_id' => 'required|exists:categories,id',
             'description' => 'nullable',
+            'content' => 'nullable',
             'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'images' => 'nullable|array',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
@@ -242,6 +245,7 @@ class AdminController extends Controller
             'sale_price' => $request->sale_price ?: null,
             'stock' => $request->stock,
             'description' => $request->description,
+            'content' => $request->content,
             'specifications' => $specs,
             'status' => $request->has('status')
         ];
