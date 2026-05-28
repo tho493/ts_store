@@ -20,13 +20,5 @@ if errorlevel 1 (
 
 docker compose up -d --no-deps app nginx
 
-timeout /t 5 /nobreak >nul
-
-docker compose exec -T app php artisan migrate --force
-docker compose exec -T app php artisan config:cache
-docker compose exec -T app php artisan route:cache
-docker compose exec -T app php artisan view:cache
-docker compose exec -T app php artisan event:cache
-
 echo [Done] Deploy completed
 pause

@@ -13,12 +13,14 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Sinh user test mặc định
-        User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@tsbattery.com',
-            'password' => bcrypt('password'), // Mật khẩu mặc định
-            'role' => 'admin',
-        ]);
+        User::firstOrCreate(
+            ['email' => 'admin@tsbattery.com'],
+            [
+                'name' => 'Admin',
+                'password' => bcrypt('password'), // Mật khẩu mặc định
+                'role' => 'admin',
+            ]
+        );
 
         // Chạy các seeder nghiệp vụ
         $this->call([

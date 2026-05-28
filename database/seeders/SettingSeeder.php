@@ -19,19 +19,19 @@ class SettingSeeder extends Seeder
             ],
             [
                 'key' => 'hotline',
-                'value' => '0987.654.321',
+                'value' => '0896505169',
             ],
             [
                 'key' => 'zalo_link',
-                'value' => 'https://zalo.me/0987654321',
+                'value' => 'https://zalo.me/0896505169',
             ],
             [
                 'key' => 'messenger_link',
-                'value' => 'https://m.me/tsbattery',
+                'value' => 'https://m.me/tho493',
             ],
             [
                 'key' => 'address',
-                'value' => '123 Đường Năng Lượng, Phường Công Nghệ, Quận Cầu Giấy, Hà Nội',
+                'value' => '132 Quận Cầu Giấy, Hà Nội',
             ]
         ];
 

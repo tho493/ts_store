@@ -11,6 +11,7 @@ RUN npm ci
 COPY vite.config.js ./
 COPY resources ./resources
 COPY public ./public
+COPY app ./app
 
 RUN npm run build
 
@@ -53,6 +54,7 @@ RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist
 
 # Copy application source
 COPY . .
+RUN cp .env.example .env
 
 # Copy built assets from Stage 1
 COPY --from=node-build /build/public/build ./public/build

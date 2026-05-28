@@ -25,7 +25,10 @@ class ProductSeeder extends Seeder
 
         $catModels = [];
         foreach ($categories as $cat) {
-            $catModels[$cat['slug']] = Category::create($cat);
+            $catModels[$cat['slug']] = Category::firstOrCreate(
+                ['slug' => $cat['slug']],
+                ['name' => $cat['name']]
+            );
         }
 
         // 2. Tạo danh sách sản phẩm pin mẫu
@@ -153,7 +156,10 @@ class ProductSeeder extends Seeder
             $prod['slug'] = Str::slug($prod['name']);
             $prod['status'] = true;
 
-            Product::create($prod);
+            Product::updateOrCreate(
+                ['sku' => $prod['sku']],
+                $prod
+            );
         }
     }
 }
